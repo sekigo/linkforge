@@ -1,6 +1,6 @@
 # LinkForge
 
-Сервис коротких ссылок. Учебный проект, на котором собираем настоящий бэкенд: HTTP API, PostgreSQL, Redis, миграции, Docker, Kubernetes, CI.
+Сервис коротких ссылок. Учебный проект. HTTP API, PostgreSQL, Redis, миграции, Docker, Kubernetes, CI.
 
 ## Стек
 
@@ -18,7 +18,7 @@
 - Docker + docker compose
 - `migrate` CLI: `go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest`
 
-## Быстрый старт
+## Старт
 
 ```bash
 # поднять postgres + redis
@@ -31,7 +31,6 @@ make migrate-up
 make run
 ```
 
-API будет на `http://localhost:8080`.
 
 ### Создать ссылку
 
@@ -66,30 +65,3 @@ internal/http/      HTTP роутер, handlers, middleware
 migrations/         SQL миграции (golang-migrate)
 deploy/k8s/         Kubernetes манифесты (TODO)
 ```
-
-## Воркфлоу разработки
-
-1. Берём issue из GitHub
-2. Создаём ветку `feature/<issue-number>-<slug>`
-3. Пишем код, тесты, прогоняем `make test lint`
-4. Открываем PR — CI должен пройти зелёным
-5. Получаем ревью, правим
-6. Squash merge в `main`
-
-## Что осознанно НЕ сделано (это будущие таски)
-
-- Kubernetes манифесты (Deployment / Service / ConfigMap / Ingress)
-- Helm chart
-- HTTP-уровневые интеграционные тесты с `httptest`
-- Worker для агрегации аналитики кликов
-- Rate limiting через Redis
-- Аутентификация / API-ключи
-- Метрики (Prometheus) и трейсинг (OpenTelemetry)
-- Структурированный конфиг с валидацией (например через `viper` или `envconfig`)
-- Идемпотентность создания ссылок (если уже есть такой URL — вернуть существующий)
-- Кастомные коды (alias)
-- TTL и удаление просроченных ссылок
-- Аналитика кликов
-- Health check для зависимостей (postgres/redis) в `/healthz`
-
-Каждый из этих пунктов станет отдельным issue.
